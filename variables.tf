@@ -255,110 +255,110 @@ variable "ssh_keys" {
   }
 }
 
-variable "vsi" {
-  description = "A list describing VSI workloads to create"
-  type = list(
-    object({
-      name                            = string
-      vpc_name                        = string
-      subnet_names                    = list(string)
-      ssh_keys                        = list(string)
-      image_name                      = string
-      machine_type                    = string
-      vsi_per_subnet                  = number
-      user_data                       = optional(string)
-      resource_group                  = optional(string)
-      enable_floating_ip              = optional(bool)
-      security_groups                 = optional(list(string))
-      boot_volume_encryption_key_name = optional(string)
-      security_group = optional(
-        object({
-          name = string
-          rules = list(
-            object({
-              name      = string
-              direction = string
-              source    = string
-              tcp = optional(
-                object({
-                  port_max = number
-                  port_min = number
-                })
-              )
-              udp = optional(
-                object({
-                  port_max = number
-                  port_min = number
-                })
-              )
-              icmp = optional(
-                object({
-                  type = number
-                  code = number
-                })
-              )
-            })
-          )
-        })
-      )
-      block_storage_volumes = optional(list(
-        object({
-          name           = string
-          profile        = string
-          capacity       = optional(number)
-          iops           = optional(number)
-          encryption_key = optional(string)
-        })
-      ))
-      load_balancers = optional(list(
-        object({
-          name              = string
-          type              = string
-          listener_port     = number
-          listener_protocol = string
-          connection_limit  = number
-          algorithm         = string
-          protocol          = string
-          health_delay      = number
-          health_retries    = number
-          health_timeout    = number
-          health_type       = string
-          pool_member_port  = string
-          security_group = optional(
-            object({
-              name = string
-              rules = list(
-                object({
-                  name      = string
-                  direction = string
-                  source    = string
-                  tcp = optional(
-                    object({
-                      port_max = number
-                      port_min = number
-                    })
-                  )
-                  udp = optional(
-                    object({
-                      port_max = number
-                      port_min = number
-                    })
-                  )
-                  icmp = optional(
-                    object({
-                      type = number
-                      code = number
-                    })
-                  )
-                })
-              )
-            })
-          )
-        })
-      ))
-    })
-  )
-}
+# variable "vsi" {
+#   description = "A list describing VSI workloads to create"
+#   type = list(
+#     object({
+#       name                            = string
+#       vpc_name                        = string
+#       subnet_names                    = list(string)
+#       ssh_keys                        = list(string)
+#       image_name                      = string
+#       machine_type                    = string
+#       vsi_per_subnet                  = number
+#       user_data                       = optional(string)
+#       resource_group                  = optional(string)
+#       enable_floating_ip              = optional(bool)
+#       security_groups                 = optional(list(string))
+#       boot_volume_encryption_key_name = optional(string)
+#       security_group = optional(
+#         object({
+#           name = string
+#           rules = list(
+#             object({
+#               name      = string
+#               direction = string
+#               source    = string
+#               tcp = optional(
+#                 object({
+#                   port_max = number
+#                   port_min = number
+#                 })
+#               )
+#               udp = optional(
+#                 object({
+#                   port_max = number
+#                   port_min = number
+#                 })
+#               )
+#               icmp = optional(
+#                 object({
+#                   type = number
+#                   code = number
+#                 })
+#               )
+#             })
+#           )
+#         })
+#       )
+#       block_storage_volumes = optional(list(
+#         object({
+#           name           = string
+#           profile        = string
+#           capacity       = optional(number)
+#           iops           = optional(number)
+#           encryption_key = optional(string)
+#         })
+#       ))
+#       load_balancers = optional(list(
+#         object({
+#           name              = string
+#           type              = string
+#           listener_port     = number
+#           listener_protocol = string
+#           connection_limit  = number
+#           algorithm         = string
+#           protocol          = string
+#           health_delay      = number
+#           health_retries    = number
+#           health_timeout    = number
+#           health_type       = string
+#           pool_member_port  = string
+#           security_group = optional(
+#             object({
+#               name = string
+#               rules = list(
+#                 object({
+#                   name      = string
+#                   direction = string
+#                   source    = string
+#                   tcp = optional(
+#                     object({
+#                       port_max = number
+#                       port_min = number
+#                     })
+#                   )
+#                   udp = optional(
+#                     object({
+#                       port_max = number
+#                       port_min = number
+#                     })
+#                   )
+#                   icmp = optional(
+#                     object({
+#                       type = number
+#                       code = number
+#                     })
+#                   )
+#                 })
+#               )
+#             })
+#           )
+#         })
+#       ))
+#     })
+#   )
+# }
 
 ##############################################################################
 
@@ -940,62 +940,62 @@ variable "security_groups" {
 #   default   = null
 # }
 
-# variable "teleport_vsi" {
-#   description = "A list of teleport vsi deployments"
-#   type = list(
-#     object(
-#       {
-#         name                            = string
-#         vpc_name                        = string
-#         resource_group                  = optional(string)
-#         subnet_name                     = string
-#         ssh_keys                        = list(string)
-#         boot_volume_encryption_key_name = string
-#         image_name                      = string
-#         machine_type                    = string
-#         security_groups                 = optional(list(string))
-#         security_group = optional(
-#           object({
-#             name = string
-#             rules = list(
-#               object({
-#                 name      = string
-#                 direction = string
-#                 source    = string
-#                 tcp = optional(
-#                   object({
-#                     port_max = number
-#                     port_min = number
-#                   })
-#                 )
-#                 udp = optional(
-#                   object({
-#                     port_max = number
-#                     port_min = number
-#                   })
-#                 )
-#                 icmp = optional(
-#                   object({
-#                     type = number
-#                     code = number
-#                   })
-#                 )
-#               })
-#             )
-#           })
-#         )
+variable "teleport_vsi" {
+  description = "A list of teleport vsi deployments"
+  type = list(
+    object(
+      {
+        name                            = string
+        vpc_name                        = string
+        resource_group                  = optional(string)
+        subnet_name                     = string
+        ssh_keys                        = list(string)
+        boot_volume_encryption_key_name = string
+        image_name                      = string
+        machine_type                    = string
+        security_groups                 = optional(list(string))
+        security_group = optional(
+          object({
+            name = string
+            rules = list(
+              object({
+                name      = string
+                direction = string
+                source    = string
+                tcp = optional(
+                  object({
+                    port_max = number
+                    port_min = number
+                  })
+                )
+                udp = optional(
+                  object({
+                    port_max = number
+                    port_min = number
+                  })
+                )
+                icmp = optional(
+                  object({
+                    type = number
+                    code = number
+                  })
+                )
+              })
+            )
+          })
+        )
 
 
-#       }
-#     )
-#   )
-#   default = []
-#   # vsi name validation
-#   validation {
-#     condition     = length(distinct([for name in flatten(var.teleport_vsi[*].name) : name])) == length(flatten(var.teleport_vsi[*].name))
-#     error_message = "Duplicate teleport_vsi name. Please provide unique teleport_vsi names."
-#   }
-# }
+      }
+    )
+  )
+  default = []
+  # vsi name validation
+  validation {
+    condition     = length(distinct([for name in flatten(var.teleport_vsi[*].name) : name])) == length(flatten(var.teleport_vsi[*].name))
+    error_message = "Duplicate teleport_vsi name. Please provide unique teleport_vsi names."
+  }
+}
 
 ##############################################################################
 
